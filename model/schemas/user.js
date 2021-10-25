@@ -31,6 +31,10 @@ const userSchema = new Schema({
         type: String,
         default: 'Guest',    
     },
+    token: {
+        type: String,
+        default: null,
+    },
 },
     {
         versionKey: false,
