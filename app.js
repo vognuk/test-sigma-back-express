@@ -9,10 +9,6 @@ const app = express();
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 app.use(logger(formatsLogger));
 
-app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, 'client/build/index.html'));
-});
-
 app.use(
   cors({
     origin: "*",
@@ -22,9 +18,10 @@ app.use(
   })
 );
 app.use(express.json());
+app.use(express.static('client/build'))
 app.use("/api/users", usersRouter);
 app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname + "/client/public/index.html"));
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });

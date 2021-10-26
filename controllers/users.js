@@ -33,7 +33,7 @@ const reg = async (req, res, next) => {
 const login = async (req, res, next) => {
     const { email, password } = req.body
     const user = await Users.findByEmail(email)
-    const isValidPassword = await user?.validPassword(password)
+    const isValidPassword = user ? await user.validPassword(password) : null
 
     if (!user || !isValidPassword) {
         return res.status(HttpCode.UNAUTHORIZED).json({
