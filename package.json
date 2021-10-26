@@ -10,9 +10,7 @@
     "client": "npm run start --prefix client",
     "client:install": "npm install --prefix client",
     "client:build": "npm run build --prefix client",
-    "dev": "cross-env NODE_ENV=development concurrently \"npm run server\" \"npm run client\"",
-    "build": "node build/build.js"
-  },
+    "dev": "cross-env NODE_ENV=development concurrently \"npm run server\" \"npm run client\""  },
   "dependencies": {
     "bcryptjs": "2.4.3",
     "cloudinary": "^1.25.1",
