@@ -10,7 +10,7 @@ const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 app.use(logger(formatsLogger));
 
 app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, 'client/public/index.html'));
+  res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
 
 app.use(
