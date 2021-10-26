@@ -2,13 +2,16 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 const path = require("path");
-
-/*Safity*/
 const helmet = require("helmet");
 const usersRouter = require("./routes/users");
 const app = express();
+
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 app.use(logger(formatsLogger));
+
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, 'client/public/index.html'));
+});
 
 app.use(
   cors({
