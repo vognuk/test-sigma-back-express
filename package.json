@@ -6,7 +6,11 @@
     "start": "cross-env NODE_ENV=production node ./bin/server.js",
     "start:dev": "cross-env NODE_ENV=development nodemon ./bin/server.js",
     "lint": "eslint **/*.js",
-    "lint:fix": "eslint --fix **/*.js"
+    "lint:fix": "eslint --fix **/*.js",
+    "client": "npm run start --prefix client",
+    "client:install": "npm install --prefix client",
+    "client:build": "npm run build --prefix client",
+    "dev": "cross-env NODE_ENV=development concurrently \"npm run server\" \"npm run client\""
   },
   "dependencies": {
     "bcryptjs": "2.4.3",
