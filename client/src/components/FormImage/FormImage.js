@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { Container, Button, Form, FormGroup, Input } from "reactstrap";
 import { useDispatch } from "react-redux";
 import { authOperations } from "../../redux/auth";
+import isEnoughLongPassword from "../../core/utils/validator"
+import { toast } from "react-toastify";
 
 const FormImage = ({
   formHeading,
@@ -64,7 +66,9 @@ const FormImage = ({
     setName(name);
     setSecondName(secondName);
     setEmail(email);
-    setPassword(password);
+    if (isEnoughLongPassword(password)) {
+      setPassword(password);
+    }
     setBirthdate(birthdate);
 
     switch (formHeading) {
@@ -90,11 +94,11 @@ const FormImage = ({
         break;
     }
 
-    setName("");
-    setSecondName("");
-    setEmail("");
-    setPassword("");
-    setBirthdate("");
+    // setName("");
+    // setSecondName("");
+    // setEmail("");
+    // setPassword("");
+    // setBirthdate("");
   };
 
   return (
@@ -136,6 +140,7 @@ const FormImage = ({
               id="email"
               placeholder="Email"
               onChange={handleChange}
+              required
             />
           </FormGroup>
         )}
@@ -149,6 +154,7 @@ const FormImage = ({
               id="Password"
               placeholder="Password "
               onChange={handleChange}
+              required
             />
           </FormGroup>
         )}
