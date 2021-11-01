@@ -15,6 +15,9 @@ import Preloader from "./components/Preloader/Preloader";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const homeView = lazy(() => import("./views/Main"));
 const regView = lazy(() => import("./views/Register"));
 const loginView = lazy(() => import("./views/Login"));
@@ -28,12 +31,14 @@ function App({ histry }) {
 
   // const [fields, setFields] = useState();
   // const dispatch = useDispatch();
+// }
   // useEffect(() => {
-  //   dispatch.authOperations.getCurrentUser();
+    // dispatch.authOperations.getCurrentUser();
   // }, []);
 
   return (
     <div className="App">
+      <ToastContainer autoClose={5000} />
       <header>
         <Header setLoged={setLoged} />
       </header>

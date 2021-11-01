@@ -1,5 +1,6 @@
 import axios from "axios";
 import authActions from "./authActions";
+import { toast, ToastContainer } from "react-toastify";
 
 axios.defaults.baseURL = "http://localhost:3000";
 
@@ -17,13 +18,15 @@ const register = (credentials) => async (dispatch) => {
   try {
     const response = await axios.post("/api/users/register", credentials);
     token.set(response.data.token);
+    toast.success("You are registered!");
     dispatch(authActions.registerSuccess(response.data));
   } catch (error) {
-    console.log(
-      "Добавить уведомление об ошибке регистрации и ее причине(из ответа сервера)",
-      error
-    );
     dispatch(authActions.registerError(error.message));
+    if (error.message.includes("409")) {
+      toast.error("User is already exist!");
+    } else {    
+      toast.error(error.message);
+    }
   }
 };
 
@@ -33,10 +36,15 @@ const logIn = (credentials) => async (dispatch) => {
   try {
     const response = await axios.post("/api/users/login", credentials);
     token.set(response.data.token);
+    toast.success("You are logged in!");
     dispatch(authActions.loginSuccess(response.data));
   } catch (error) {
-    // console.log(error.message, "Добавить уведомление об ошибке логина и ее причине(из ответа сервера)", error);
     dispatch(authActions.loginError(error.message));
+    if (error.message.includes("401")) {
+      toast.error("Wrong email or password!");
+    } else { 
+      toast.error(error.message);
+    }
   }
 };
 
