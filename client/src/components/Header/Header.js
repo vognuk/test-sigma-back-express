@@ -13,7 +13,7 @@ import { FiHome } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
 import { authSelectors, authOperations } from "../../redux/auth";
 
-const Header = (props, setLoged) => {
+const Header = (props) => {
   const [collapsed, setCollapsed] = useState(true);
   let isAuthenticated = useSelector((state) =>
     authSelectors.getIsAuthenticated(state)
@@ -29,7 +29,7 @@ const Header = (props, setLoged) => {
 
   const onLogout = () => {
     dispatch(authOperations.logOut(token.token));
-    // isAuthenticated = !isAuthenticated;
+    isAuthenticated = !isAuthenticated;
     toggleNavbar(); 
   }
 
