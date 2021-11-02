@@ -7,9 +7,7 @@ import {
   Nav,
   NavItem,
   NavLink,
-  Button,
 } from "reactstrap";
-import routes from "../../routes/routes";
 import { NavLink as NavLinkRoute } from "react-router-dom";
 import { FiHome } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
@@ -20,19 +18,18 @@ const Header = (props, setLoged) => {
   let isAuthenticated = useSelector((state) =>
     authSelectors.getIsAuthenticated(state)
   );
+
+  const token = useSelector (({auth}) => auth.token);
+
   useEffect(() => {
-    // setLoged(false);
   }, [isAuthenticated]);
 
-  console.log(isAuthenticated);
-
   const dispatch = useDispatch();
-
   const toggleNavbar = () => setCollapsed(!collapsed);
 
   const onLogout = () => {
-    dispatch(authOperations.logOut());
-    isAuthenticated = false;
+    dispatch(authOperations.logOut(token.token));
+    // isAuthenticated = !isAuthenticated;
     toggleNavbar(); 
   }
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 import authActions from "./authActions";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 axios.defaults.baseURL = "https://testsigma.herokuapp.com" //"http://localhost:3000";
 
@@ -18,7 +18,7 @@ const register = (credentials) => async (dispatch) => {
   try {
     const response = await axios.post("/api/users/register", credentials);
     token.set(response.data.token);
-    toast.success("You are registered!");
+    toast.success("You are registered and logged in!");
     dispatch(authActions.registerSuccess(response.data));
   } catch (error) {
     dispatch(authActions.registerError(error.message));
@@ -48,18 +48,18 @@ const logIn = (credentials) => async (dispatch) => {
   }
 };
 
-const logOut = () => async (dispatch) => {
+const logOut = (persistedToken) => async (dispatch) => {
   dispatch(authActions.logoutRequest());
   try {
+    if (!persistedToken) {
+      return;
+    }
+    token.set(persistedToken);
     await axios.post("/api/users/logout");
-    token.unset();
     dispatch(authActions.logoutSuccess());
-    console.log("ok")
+    toast.success("You are logged out!");
   } catch (error) {
-    console.log(
-      "Добавить уведомление об ошибке выхода и ее причине(из ответа сервера)",
-      error.message
-    );
+    toast.error(error.message);
     dispatch(authActions.logoutError(error.message));
   }
 };

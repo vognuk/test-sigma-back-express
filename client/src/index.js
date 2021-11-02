@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Router } from "react-router-dom";
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { createBrowserHistory } from "history";
@@ -15,9 +16,11 @@ const history = createBrowserHistory();
 ReactDOM.render(
   <Provider store={store.store}>
     <PersistGate loading={null} persistor={store.persistor}>
-      <Router history={history}>
-        <App />
-      </Router>
+      <BrowserRouter>
+        <Router history={history}>
+          <App />
+        </Router>
+      </BrowserRouter>
     </PersistGate>
   </Provider>,
   document.getElementById("root")

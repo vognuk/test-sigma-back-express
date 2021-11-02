@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, NavItem, Nav } from "reactstrap";
+import { NavLink } from "reactstrap";
 import { FiLinkedin } from "react-icons/fi";
 
 const Footer = () => {

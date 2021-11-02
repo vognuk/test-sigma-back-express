@@ -1,21 +1,20 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import "./App.css";
-import React, { useEffect, Suspense, lazy, useState } from "react";
+import React, { Suspense, lazy } from "react";
 
 import { Switch, Route, Redirect } from "react-router-dom";
 import routes from "./routes/routes";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
-import { NavLink } from "react-router-dom";
 
-import { useSelector, useDispatch } from "react-redux";
-import { authSelectors, authOperations } from "./redux/auth";
+import { useSelector} from "react-redux";
+import { authSelectors} from "./redux/auth";
 
 import Preloader from "./components/Preloader/Preloader";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const homeView = lazy(() => import("./views/Main"));
@@ -23,24 +22,15 @@ const regView = lazy(() => import("./views/Register"));
 const loginView = lazy(() => import("./views/Login"));
 const userView = lazy(() => import("./views/User"));
 
-function App({ history, redirectTo }) {
-  const [loged, setLoged] = useState(true);
-  const isAuthenticated = useSelector((state) =>
-    authSelectors.getIsAuthenticated(state)
-  );
-
-  // const [fields, setFields] = useState();
-  // const dispatch = useDispatch();
-// }
-  // useEffect(() => {
-    // dispatch.authOperations.getCurrentUser();
-  // }, []);
-
+function App() {
+  let isAuthenticated = useSelector((state) =>
+  authSelectors.getIsAuthenticated(state)
+);
   return (
     <div className="App">
-      <ToastContainer autoClose={5000} />
+      <ToastContainer autoClose={2000} />
       <header>
-        <Header setLoged={setLoged} />
+        <Header />
       </header>
       <main>
         <Suspense fallback={<Preloader />}>
@@ -64,11 +54,12 @@ function App({ history, redirectTo }) {
               component={regView}
             />
             <PrivateRoute
-              to={redirectTo}
+              redirectTo='/user'
               path={routes.userPage}
               component={userView}
+              isAuthenticated={isAuthenticated}
             />
-            <Redirect to="/" />
+            <Redirect to={routes.homeView} />
           </Switch>
         </Suspense>
       </main>
