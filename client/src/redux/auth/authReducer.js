@@ -1,7 +1,6 @@
 import { combineReducers } from "redux";
 import { createReducer } from "@reduxjs/toolkit";
 import authActions from "./authActions";
-import { toast, ToastContainer } from "react-toastify";
 
 const initialUserState = {
   name: null,

@@ -30,6 +30,12 @@ const Header = (props, setLoged) => {
 
   const toggleNavbar = () => setCollapsed(!collapsed);
 
+  const onLogout = () => {
+    dispatch(authOperations.logOut());
+    isAuthenticated = false;
+    toggleNavbar(); 
+  }
+
   return (
     <div>
       <Navbar
@@ -49,7 +55,7 @@ const Header = (props, setLoged) => {
                 <NavLinkRoute
                   style={{ textDecoration: "none" }}
                   to="/"
-                  onClick={() => dispatch(authOperations.logOut())}
+                  onClick={onLogout}
                   exact
                 >
                   <NavLink>Logout</NavLink>
@@ -63,12 +69,12 @@ const Header = (props, setLoged) => {
                     to="/register"
                     exact
                   >
-                    <NavLink>Register</NavLink>
+                    <NavLink onClick = {toggleNavbar}>Register</NavLink>
                   </NavLinkRoute>
                 </NavItem>
                 <NavItem>
                   <NavLinkRoute style={{ textDecoration: "none" }} to="/login">
-                    <NavLink>Login</NavLink>
+                    <NavLink onClick = {toggleNavbar}>Login</NavLink>
                   </NavLinkRoute>
                 </NavItem>
               </>

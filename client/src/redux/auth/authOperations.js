@@ -54,10 +54,11 @@ const logOut = () => async (dispatch) => {
     await axios.post("/api/users/logout");
     token.unset();
     dispatch(authActions.logoutSuccess());
+    console.log("ok")
   } catch (error) {
     console.log(
       "Добавить уведомление об ошибке выхода и ее причине(из ответа сервера)",
-      error
+      error.message
     );
     dispatch(authActions.logoutError(error.message));
   }
