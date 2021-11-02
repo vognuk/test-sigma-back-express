@@ -23,7 +23,7 @@ const regView = lazy(() => import("./views/Register"));
 const loginView = lazy(() => import("./views/Login"));
 const userView = lazy(() => import("./views/User"));
 
-function App({ histry }) {
+function App({ history, redirectTo }) {
   const [loged, setLoged] = useState(true);
   const isAuthenticated = useSelector((state) =>
     authSelectors.getIsAuthenticated(state)
@@ -64,7 +64,7 @@ function App({ histry }) {
               component={regView}
             />
             <PrivateRoute
-              redirectTo="/user"
+              to={redirectTo}
               path={routes.userPage}
               component={userView}
             />
