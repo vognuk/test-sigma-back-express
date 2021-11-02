@@ -51,17 +51,19 @@ const login = async (req, res, next) => {
     return res.status(HttpCode.OK).json({
         status: '200 OK',
         code: HttpCode.OK,
-        token: { token },
+        token: user.token,
         user: {
-            email: newUser.email,
-            subscription: newUser.subscription,
+            name: user.name,
+            secondName: user.secondName,
+            email: user.email,
+            birthdate: user.birthdate
         },
     })
 }
 
 const logout = async (req, res, next) => {
-    const token = req.user.token
-    await Users.updateToken(token, null)
+    const id = req.user.id
+    await Users.updateToken(id, null)
     return res.status(HttpCode.NO_CONTENT).json({
         status: '204 No Content'
     })

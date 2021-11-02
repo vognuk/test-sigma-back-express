@@ -29,7 +29,7 @@ const userSchema = new Schema({
     },
     birthdate: {
         type: String,
-        default: 'Guest',    
+        default: 'No date',    
     },
     token: {
         type: String,
