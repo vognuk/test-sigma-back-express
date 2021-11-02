@@ -2,7 +2,7 @@ import axios from "axios";
 import authActions from "./authActions";
 import { toast } from "react-toastify";
 
-axios.defaults.baseURL = "https://testsigma.herokuapp.com" //"http://localhost:3000";
+axios.defaults.baseURL = "https://testsigma.herokuapp.com"; //"http://localhost:3000"; 
 
 const token = {
   set(token) {
@@ -56,8 +56,8 @@ const logOut = (persistedToken) => async (dispatch) => {
     }
     token.set(persistedToken);
     await axios.post("/api/users/logout");
-    dispatch(authActions.logoutSuccess());
     toast.success("You are logged out!");
+    dispatch(authActions.logoutSuccess(token));
   } catch (error) {
     toast.error(error.message);
     dispatch(authActions.logoutError(error.message));
