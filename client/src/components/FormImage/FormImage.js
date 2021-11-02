@@ -66,9 +66,9 @@ const FormImage = ({
     setName(name);
     setSecondName(secondName);
     setEmail(email);
-    if (isEnoughLongPassword(password)) {
+    // if (isEnoughLongPassword(password)) {
       setPassword(password);
-    }
+    // }
     setBirthdate(birthdate);
 
     switch (formHeading) {
