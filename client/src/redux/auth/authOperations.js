@@ -2,7 +2,7 @@ import axios from "axios";
 import authActions from "./authActions";
 import { toast, ToastContainer } from "react-toastify";
 
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = "https://testsigma.herokuapp.com" //"http://localhost:3000";
 
 const token = {
   set(token) {
