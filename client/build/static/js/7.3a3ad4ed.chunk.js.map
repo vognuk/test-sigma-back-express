@@ -1,1 +1,0 @@
-{"version":3,"sources":["views/User.js"],"names":["User"],"mappings":"wIAAA,uBAUeA,UARF,WACX,OACE,mCACE","file":"static/js/7.3a3ad4ed.chunk.js","sourcesContent":["import React from \"react\";\r\n\r\nconst User = () => {\r\n  return (\r\n    <>\r\n      <h1>User private page</h1>\r\n    </>\r\n  );\r\n};\r\n\r\nexport default User;\r\n"],"sourceRoot":""}
