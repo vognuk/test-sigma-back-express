@@ -19,17 +19,23 @@ const Header = (props) => {
     authSelectors.getIsAuthenticated(state)
   );
 
+  let userName = useSelector((state) =>
+  authSelectors.getUserName(state)
+);
+
   const token = useSelector (({auth}) => auth.token);
 
   useEffect(() => {
+    // isAuthenticated = !isAuthenticated;
   }, [isAuthenticated]);
 
   const dispatch = useDispatch();
   const toggleNavbar = () => setCollapsed(!collapsed);
 
   const onLogout = () => {
-    dispatch(authOperations.logOut(token.token));
-    isAuthenticated = !isAuthenticated;
+    dispatch(authOperations.logOut(token));
+    // console.log(token);
+    // isAuthenticated = !isAuthenticated;
     toggleNavbar(); 
   }
 
@@ -49,6 +55,7 @@ const Header = (props) => {
           <Nav navbar>
             {isAuthenticated ? (
               <NavItem>
+                <h4>You logged as {userName}</h4>
                 <NavLinkRoute
                   style={{ textDecoration: "none" }}
                   to="/"
