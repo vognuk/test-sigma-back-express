@@ -16,15 +16,16 @@ const isEnoughLongPassword = (password) => {
         });
         return false;
     }
+    return true;
 }
 
-const isValidPassword = (password) => {
+const isIncludeUppercaseLetters = (password) => {
     let schema = new passwordValidator();
-    schema.is().min(8)
+    schema.is().has().uppercase();
     if (!schema.validate(password)) {
-        toast.error('Password must be longer than 8 characters', {
+        toast.error('Password must contain uppercase letters', {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 10000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -33,6 +34,25 @@ const isValidPassword = (password) => {
         });
         return false;
     }
+    return true;
 }
 
-export default isEnoughLongPassword;
+const isIncludeDigits = (password) => {
+    let schema = new passwordValidator();
+    schema.has().digits(2);
+    if (!schema.validate(password)) {
+        toast.error('Password must contain at least 2 digits', {
+            position: "top-right",
+            autoClose: 10000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+        return false;
+    }
+    return true;
+}
+
+export {isEnoughLongPassword, isIncludeUppercaseLetters, isIncludeDigits};
