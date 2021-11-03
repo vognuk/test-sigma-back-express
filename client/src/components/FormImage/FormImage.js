@@ -6,9 +6,7 @@ import { useDispatch } from "react-redux";
 import { authOperations } from "../../redux/auth";
 import { withRouter } from "react-router";
 import UserPage from "../../views/User"
-
-import isEnoughLongPassword from "../../core/utils/validator"
-import { toast } from "react-toastify";
+import {isEnoughLongPassword, isIncludeUppercaseLetters, isIncludeDigits} from "../../core/utils/validator"
 
 const FormImage = ({
   formHeading,
@@ -25,7 +23,6 @@ const FormImage = ({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [birthdate, setBirthdate] = useState("");
-
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -69,32 +66,36 @@ const FormImage = ({
     setName(name);
     setSecondName(secondName);
     setEmail(email);
-    // if (isEnoughLongPassword(password)) {
-      setPassword(password);
-    // }
     setBirthdate(birthdate);
 
     switch (formHeading) {
       case "Registration":
-        dispatch(
-          authOperations.register({
-            name,
-            secondName,
-            email,
-            password,
-            birthdate,
-          })
-        );
+        if (isEnoughLongPassword(password) === true 
+          && isIncludeUppercaseLetters(password) === true 
+          && isIncludeDigits(password)
+        ) {
+          setPassword(password);
+          dispatch(
+            authOperations.register({
+              name,
+              secondName,
+              email,
+              password,
+              birthdate,
+            })
+          )
+        }
         break;
 
       case "Login":
+        setPassword(password);
         dispatch(
           authOperations.logIn({
             email,
             password,
           })
         );
-        withRouter(UserPage);
+        // withRouter(UserPage);
         break;
     }
 
