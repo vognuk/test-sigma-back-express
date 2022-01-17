@@ -62,8 +62,8 @@ const login = async (req, res, next) => {
 }
 
 const logout = async (req, res, next) => {
-    const id = req.user.id
-    await Users.updateToken(id, null)
+    const token = req.user.token
+    await Users.updateToken(token, null)
     return res.status(HttpCode.NO_CONTENT).json({
         status: '204 No Content'
     })

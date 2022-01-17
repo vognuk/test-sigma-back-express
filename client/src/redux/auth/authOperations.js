@@ -33,7 +33,6 @@ const register = (credentials) => async (dispatch) => {
 
 const logIn = (credentials) => async (dispatch) => {
   dispatch(authActions.loginRequest());
-
   try {
     const response = await axios.post("/api/users/login", credentials);
     token.set(response.data.token);
@@ -54,9 +53,10 @@ const logOut = (persistedToken) => async (dispatch) => {
   try {
     if (!persistedToken) {
       return;
-    }
-    token.set(persistedToken);
+    }  
     await axios.post("/api/users/logout");
+    console.log(persistedToken)
+    token.set(persistedToken);
     toast.success("You are logged out!");
     dispatch(authActions.logoutSuccess());
   } catch (error) {

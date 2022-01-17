@@ -22,19 +22,18 @@ const Header = (props) => {
   let userName = useSelector((state) =>
   authSelectors.getUserName(state)
 );
-
+  const dispatch = useDispatch();
   const token = useSelector (({auth}) => auth.token);
 
   useEffect(() => {
     // isAuthenticated = !isAuthenticated;
   }, [isAuthenticated]);
 
-  const dispatch = useDispatch();
   const toggleNavbar = () => setCollapsed(!collapsed);
 
   const onLogout = () => {
     dispatch(authOperations.logOut(token));
-    // console.log(token);
+    console.log(token);
     // isAuthenticated = !isAuthenticated;
     toggleNavbar(); 
   }

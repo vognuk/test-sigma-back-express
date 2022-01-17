@@ -4,8 +4,6 @@ import React, { useState } from "react";
 import { Container, Button, Form, FormGroup, Input } from "reactstrap";
 import { useDispatch } from "react-redux";
 import { authOperations } from "../../redux/auth";
-import { withRouter } from "react-router";
-import UserPage from "../../views/User"
 import {isEnoughLongPassword, isIncludeUppercaseLetters, isIncludeDigits} from "../../core/utils/validator"
 
 const FormImage = ({
@@ -95,7 +93,6 @@ const FormImage = ({
             password,
           })
         );
-        // withRouter(UserPage);
         break;
     }
 

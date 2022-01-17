@@ -2,7 +2,7 @@
 import "./App.css";
 import React, { Suspense, lazy } from "react";
 
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, IndexRoute } from "react-router-dom";
 import routes from "./routes/routes";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
@@ -35,7 +35,7 @@ function App() {
       <main>
         <Suspense fallback={<Preloader />}>
           <Switch>
-            <Route
+            <IndexRoute
               exact
               redirectTo="/"
               path={routes.homeView}
